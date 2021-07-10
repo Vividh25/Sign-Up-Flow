@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    padding: 50px;
+    border: 1px solid grey;
+    border-radius: 15px;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    outline: none;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 15px;
+}
+
+.invalid-field {
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 15px;
+    outline: none;
+}
+
+.error-msg {
+    
+    font-size: small;
+}
