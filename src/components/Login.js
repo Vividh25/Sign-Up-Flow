@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../styles/Login.css';
 
 function Login() {
+  const [showPass, setShowPass] = useState(false);
+  const [confirmPass, setConfirmPass] = useState(true);
   const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
   const [userEmail, setUserEmail] = useState('');
@@ -24,11 +26,21 @@ function Login() {
   };
 
   const handlePassword = (event) => {
+    event.preventDefault();
     if (userEmail === '') {
       setEmailValid(false);
     } else {
       setEmailValid(true);
       setPassword(event.target.value);
+    }
+  };
+
+  const handleConfirmPass = (event) => {
+    event.preventDefault();
+    if (event.target.value !== password) {
+      setConfirmPass(false);
+    } else {
+      setConfirmPass(true);
     }
   };
 
@@ -38,7 +50,7 @@ function Login() {
         <div
           className='error-msg'
           data-testid='email-error-msg'
-          style={emailVaild && password === '' ? hideStyle : {}}
+          style={!emailVaild && password === '' ? {} : hideStyle}
         >
           Please enter a valid email
         </div>
@@ -49,12 +61,37 @@ function Login() {
           data-testid='email-field'
           onChange={checkInput}
         />
+        <div className='password-field'>
+          <input
+            className={`${passwordValid ? 'input-field' : 'invalid-field'}`}
+            type={showPass ? 'text' : 'password'}
+            placeholder='password'
+            data-testid='password-field'
+            onChange={handlePassword}
+          />
+          <button
+            data-testid='show-btn'
+            onClick={(e) => {
+              e.preventDefault();
+              setShowPass(!showPass);
+            }}
+          >
+            show
+          </button>
+        </div>
+        <div
+          data-testid='pass-error-msg'
+          className='error-msg'
+          style={confirmPass ? hideStyle : {}}
+        >
+          Passwords don't match
+        </div>
         <input
-          className={`${passwordValid ? 'input-field' : 'invalid-field'}`}
+          className={`${confirmPass ? 'input-field' : 'invalid-field'}`}
           type='password'
-          placeholder='password'
-          data-testid='password-field'
-          onChange={handlePassword}
+          placeholder='confirm password'
+          data-testid='confirm-pass-field'
+          onChange={handleConfirmPass}
         />
       </form>
     </div>

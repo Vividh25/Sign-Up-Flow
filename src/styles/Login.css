@@ -28,6 +28,9 @@
 }
 
 .error-msg {
-    
     font-size: small;
+}
+
+.password-field {
+    display: flex;
 }
