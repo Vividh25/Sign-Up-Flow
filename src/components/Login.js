@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import '../styles/Login.css';
 
-function Login() {
+function Login({ path }) {
   const [showPass, setShowPass] = useState(false);
+  const [confirmPassField, setConfirmPassField] = useState('');
   const [confirmPass, setConfirmPass] = useState(true);
   const [password, setPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState(true);
   const [userEmail, setUserEmail] = useState('');
   const [emailVaild, setEmailValid] = useState(true);
+  const history = useHistory();
 
   const hideStyle = {
     display: 'none',
@@ -18,7 +21,6 @@ function Login() {
     const email = ev.target.value;
     setUserEmail(email);
     if ((!email.includes('@') || !email.includes('.')) && email.length > 10) {
-      console.log('check input working');
       setEmailValid(false);
     } else {
       setEmailValid(true);
@@ -27,21 +29,35 @@ function Login() {
 
   const handlePassword = (event) => {
     event.preventDefault();
-    if (userEmail === '') {
+    setPassword(event.target.value);
+    if (userEmail === '' || !emailVaild) {
       setEmailValid(false);
     } else {
       setEmailValid(true);
-      setPassword(event.target.value);
     }
   };
 
   const handleConfirmPass = (event) => {
     event.preventDefault();
+    setConfirmPassField(event.target.value);
     if (event.target.value !== password) {
       setConfirmPass(false);
     } else {
       setConfirmPass(true);
     }
+  };
+
+  const routePage = () => {
+    history.push(path);
+  };
+
+  const checkBtn = async (e) => {
+    e.preventDefault();
+    e.target.disabled = true;
+    setTimeout(() => {
+      e.target.disabled = false;
+      routePage();
+    }, 3000);
   };
 
   return (
@@ -93,6 +109,22 @@ function Login() {
           data-testid='confirm-pass-field'
           onChange={handleConfirmPass}
         />
+        <button
+          data-testid='submit-btn'
+          disabled={
+            emailVaild &&
+            passwordValid &&
+            confirmPass &&
+            userEmail !== '' &&
+            confirmPassField !== '' &&
+            password !== ''
+              ? false
+              : true
+          }
+          onClick={checkBtn}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
