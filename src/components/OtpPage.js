@@ -3,7 +3,7 @@ import React from 'react';
 function OtpPage() {
   return (
     <div>
-      <h1 data-testid='otp-heading'>OTP Page</h1>
+      <h1 data-testid='otp-heading'>OTP Pag</h1>
     </div>
   );
 }
