@@ -62,6 +62,7 @@ function Login({ path }) {
 
   return (
     <div className='container'>
+      <h1>Sign Up Form</h1>
       <form className='login-form'>
         <div
           className='error-msg'
