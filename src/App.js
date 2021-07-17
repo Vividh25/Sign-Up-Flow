@@ -11,12 +11,29 @@ const generateRandomOTP = () => {
   return Math.floor(mockOTP);
 };
 
+const mockRefData = new Map();
+
+mockRefData.set('ert345', 'Vividh');
+mockRefData.set('rtgf234', 'Rahil');
+mockRefData.set('tghy34', 'Ankush');
+mockRefData.set('564ffg', 'Swaraj');
+mockRefData.set('856rtf', 'Sumit');
+mockRefData.set('erf889', 'Ankur');
+
+const generateRandomUserNumber = () => {
+  const val = Math.random() * 100;
+  return Math.floor(val);
+};
+
 function App() {
   return (
     <Router>
       <Switch>
         <Route path='/referral'>
-          <Referral />
+          <Referral
+            mockRefData={mockRefData}
+            generateRandomUserNumber={generateRandomUserNumber}
+          />
         </Route>
         <Route path='/otp'>
           <OtpPage generateRandomOTP={generateRandomOTP} path={referralRoute} />
