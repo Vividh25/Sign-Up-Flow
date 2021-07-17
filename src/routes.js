@@ -1,2 +1,3 @@
 const otpRoute = `/otp`;
-module.exports = { otpRoute };
+const referralRoute = `/referral`;
+module.exports = { otpRoute, referralRoute };

@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+}
+
+h1{
+    text-align: center;
+}
+
+.otp-fields{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.otp-field{
+    margin-left: 2px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+.invalid-otp-field{
+    margin-left: 2px;
+    outline: none;
+    border: 1px solid red;
+    border-radius: 10px;
+    height: 30px;
+    width: 30px;
+}
